@@ -72,10 +72,10 @@ axios
             dbObject.data.quantity = 1;
 
             // Weight
-            dbObject.data.weight = entry.Weight;
+            dbObject.data.weight = parseInt(entry.weight);
 
             // Price
-            dbObject.data.price = entry.Cost;
+            dbObject.data.price = entry.cost;
 
             // Attuned
             dbObject.data.attuned = false;
@@ -188,7 +188,7 @@ axios
             };
 
             // Weapon Type
-            switch (entry.Type) {
+            switch (entry.weaponClassification) {
                 case "SimpleBlaster":
                     dbObject.data.weaponType = "simpleB";
                     break;
