@@ -1,4 +1,5 @@
 const axios = require("axios");
+const weaponIds = require("./weaponIds");
 
 function toTitleCase(str) {
     return str.replace(/\b\w+/g, function (txt) {
@@ -18,14 +19,23 @@ axios
             // Uncomment for debugging to display all of the api entries
             // console.log(entry);
 
+            const titleCaseName = toTitleCase(entry.name);
+
+            // Id
+            dbObject._id = weaponIds[titleCaseName];
+
             // Name
-            dbObject.name = toTitleCase(entry.name);
+            dbObject.name = titleCaseName;
 
             // Permission
             dbObject.permission = { default: 0, vXYkFWX6qzvOu2jc: 3 };
 
             // Type
             dbObject.type = "weapon";
+
+            // Data
+
+            dbObject.data = {};
 
             // Description
             let descriptionValue = "";
@@ -49,51 +59,51 @@ axios
                 descriptionValue += `<p>${entry.description}</p>`;
             }
 
-            dbObject.description = {
+            dbObject.data.description = {
                 value: descriptionValue,
                 chat: "",
                 unidentified: ""
             };
 
             // Source
-            dbObject.source = entry.contentSource;
+            dbObject.data.source = entry.contentSource;
 
             // Quantity
-            dbObject.quantity = 1;
+            dbObject.data.quantity = 1;
 
             // Weight
-            dbObject.weight = entry.Weight;
+            dbObject.data.weight = entry.Weight;
 
             // Price
-            dbObject.price = entry.Cost;
+            dbObject.data.price = entry.Cost;
 
             // Attuned
-            dbObject.attuned = false;
+            dbObject.data.attuned = false;
 
             // Equipped
-            dbObject.equipped = false;
+            dbObject.data.equipped = false;
 
             // Rarity
-            dbObject.rarity = false;
+            dbObject.data.rarity = "";
 
             // Identified
-            dbObject.identified = true;
+            dbObject.data.identified = true;
 
             // Activation
-            dbObject.activation = {
+            dbObject.data.activation = {
                 type: "action",
                 cost: 1,
                 condition: ""
             };
 
             // Duration
-            dbObject.duration = {
+            dbObject.data.duration = {
                 value: null,
                 units: ""
             };
 
             // Target
-            dbObject.duration = {
+            dbObject.data.target = {
                 value: 1,
                 width: null,
                 units: "",
@@ -112,12 +122,12 @@ axios
                 rangeValues = { value: rangeSplit[0], long: rangeSplit[1], units: "ft" };
             }
 
-            dbObject.range = {
+            dbObject.data.range = {
                 ...rangeValues
             };
 
             // Uses
-            dbObject.uses = {
+            dbObject.data.uses = {
                 value: 0,
                 max: 0,
                 per: ""
@@ -125,13 +135,13 @@ axios
 
             // Consume
             if (entry.weaponClassification.includes("Blaster")) {
-                dbObject.consume = {
+                dbObject.data.consume = {
                     type: "ammo",
                     target: "",
                     amount: 1
                 };
             } else {
-                dbObject.consume = {
+                dbObject.data.consume = {
                     type: "",
                     target: "",
                     amount: null
@@ -139,28 +149,28 @@ axios
             }
 
             // Ability
-            dbObject.ability = "";
+            dbObject.data.ability = "";
 
             // Action Type
-            dbObject.actionType =
+            dbObject.data.actionType =
                 (entry.propertiesMap.Ammunition && entry.propertiesMap.Ammunition.match(/range/g)) ||
                 (entry.propertiesMap.Range && entry.propertiesMap.Range.match(/range/g))
                     ? "rwak"
                     : "mwak";
 
             // Attack Bonus
-            dbObject.attackBonus = "";
+            dbObject.data.attackBonus = "";
 
             // Chat Flavor
-            dbObject.chatFlavor = "";
+            dbObject.data.chatFlavor = "";
 
             // Critical
-            dbObject.critical = null;
+            dbObject.data.critical = null;
 
             // Damage
             const versatileValue = entry.propertiesMap.Versatile && entry.propertiesMap.Versatile.match(/\d+d\d+/g);
 
-            dbObject.damage = {
+            dbObject.data.damage = {
                 parts: entry.damageNumberOfDice
                     ? [[`${entry.damageNumberOfDice}d${entry.damageDieType} + @mod`, entry.damageType.toLowerCase()]]
                     : [],
@@ -168,10 +178,10 @@ axios
             };
 
             // Formula
-            dbObject.formula = "";
+            dbObject.data.formula = "";
 
             // Save
-            dbObject.save = {
+            dbObject.data.save = {
                 ability: "",
                 dc: null,
                 scaling: "power"
@@ -180,27 +190,27 @@ axios
             // Weapon Type
             switch (entry.Type) {
                 case "SimpleBlaster":
-                    dbObject.weaponType = "simpleB";
+                    dbObject.data.weaponType = "simpleB";
                     break;
 
                 case "MartialBlaster":
-                    dbObject.weaponType = "martialB";
+                    dbObject.data.weaponType = "martialB";
                     break;
 
                 case "SimpleVibroweapon":
-                    dbObject.weaponType = "simpleVW";
+                    dbObject.data.weaponType = "simpleVW";
                     break;
 
                 case "MartialVibroweapon":
-                    dbObject.weaponType = "martialVW";
+                    dbObject.data.weaponType = "martialVW";
                     break;
 
                 case "SimpleLightweapon":
-                    dbObject.weaponType = "simpleLW";
+                    dbObject.data.weaponType = "simpleLW";
                     break;
 
                 case "MartialLightweapon":
-                    dbObject.weaponType = "martialLW";
+                    dbObject.data.weaponType = "martialLW";
                     break;
 
                 default:
@@ -208,7 +218,7 @@ axios
             }
 
             // Properties
-            dbObject.properties = {
+            dbObject.data.properties = {
                 amm: entry.propertiesMap.hasOwnProperty("Ammunition"),
                 aut: entry.propertiesMap.hasOwnProperty("Auto"),
                 bur: entry.propertiesMap.hasOwnProperty("Burst"),
@@ -245,10 +255,10 @@ axios
             };
 
             // Proficient
-            dbObject.proficient = false;
+            dbObject.data.proficient = false;
 
             // CP Tooltip Mode
-            dbObject.cptooltipmode = "hid";
+            dbObject.data.cptooltipmode = "hid";
 
             // Flags
             dbObject.flags = {
@@ -264,9 +274,10 @@ axios
             // Image
             dbObject.img = `systems/sw5e/packs/Icons/${entry.weaponClassification
                 .split(/(?=[A-Z])/)
-                .join("%20")}/${dbObject.name.replace(" ", "%20")}.webp`;
+                .join("%20")}s/${dbObject.name.replace(" ", "%20")}.webp`;
 
             db += JSON.stringify(dbObject);
+            db += "\n";
         });
 
         console.log(db);
