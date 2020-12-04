@@ -119,7 +119,7 @@ axios
             if (rangeString) {
                 const rangeSplit = rangeString[0].split("/");
 
-                rangeValues = { value: rangeSplit[0], long: rangeSplit[1], units: "ft" };
+                rangeValues = { value: parseInt(rangeSplit[0]), long: parseInt(rangeSplit[1]), units: "ft" };
             }
 
             dbObject.data.range = {
