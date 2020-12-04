@@ -152,11 +152,15 @@ axios
             dbObject.data.ability = "";
 
             // Action Type
-            dbObject.data.actionType =
-                (entry.propertiesMap.Ammunition && entry.propertiesMap.Ammunition.match(/range/g)) ||
-                (entry.propertiesMap.Range && entry.propertiesMap.Range.match(/range/g))
-                    ? "rwak"
-                    : "mwak";
+            if (entry.description && entry.description.match(/DC \d+ \w+/g) && entry.damageDieType === 0) {
+                dbObject.data.actionType = "save";
+            } else {
+                dbObject.data.actionType =
+                    (entry.propertiesMap.Ammunition && entry.propertiesMap.Ammunition.match(/range/g)) ||
+                    (entry.propertiesMap.Range && entry.propertiesMap.Range.match(/range/g))
+                        ? "rwak"
+                        : "mwak";
+            }
 
             // Attack Bonus
             dbObject.data.attackBonus = "";
@@ -181,11 +185,23 @@ axios
             dbObject.data.formula = "";
 
             // Save
-            dbObject.data.save = {
-                ability: "",
-                dc: null,
-                scaling: "power"
-            };
+            const dcValue = entry.description && entry.description.match(/DC \d+ \w+/g);
+
+            if (dcValue) {
+                const dcValuesSplit = dcValue[0].split(" ");
+
+                dbObject.data.save = {
+                    ability: dcValuesSplit[2].substring(0, 3).toLowerCase(),
+                    dc: parseInt(dcValuesSplit[1]),
+                    scaling: "flat"
+                };
+            } else {
+                dbObject.data.save = {
+                    ability: "",
+                    dc: null,
+                    scaling: "power"
+                };
+            }
 
             // Weapon Type
             switch (entry.weaponClassification) {
@@ -251,7 +267,10 @@ axios
                 thr: entry.propertiesMap.hasOwnProperty("Thrown"),
                 two: entry.propertiesMap.hasOwnProperty("Two-Handed"),
                 ver: entry.propertiesMap.hasOwnProperty("Versatile"),
-                vic: entry.propertiesMap.hasOwnProperty("Vicious")
+                vic: entry.propertiesMap.hasOwnProperty("Vicious"),
+                mgc: false,
+                nodam: false,
+                faulldam: false
             };
 
             // Proficient
