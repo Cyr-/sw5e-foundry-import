@@ -163,7 +163,7 @@ axios
             }
 
             // Attack Bonus
-            dbObject.data.attackBonus = "";
+            dbObject.data.attackBonus = 0;
 
             // Chat Flavor
             dbObject.data.chatFlavor = "";
