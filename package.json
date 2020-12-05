@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "axios": "^0.21.0"
+    "axios": "^0.21.0",
+    "json-templates": "^4.1.0"
   },
   "devDependencies": {},
   "scripts": {
