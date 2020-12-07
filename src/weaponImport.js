@@ -8,12 +8,96 @@ function toTitleCase(str) {
     });
 }
 
+function generateUnarmedStrike(templateParameters, db) {
+    // Id
+    templateParameters._id = weaponIds["Unarmed Strike"];
+
+    // Name
+    templateParameters.name = "Unarmed Strike";
+
+    // Description
+    templateParameters.descriptionValue = "";
+
+    // Source
+    templateParameters.source = "PHB";
+
+    // Weight
+    templateParameters.weight = 0;
+
+    // Price
+    templateParameters.price = 0;
+
+    // Range
+    templateParameters.rangeValue = 5;
+    templateParameters.rangeLong = null;
+
+    // Consume
+    templateParameters.consumeType = "";
+    templateParameters.consumeAmount = null;
+
+    // Action Type
+    templateParameters.actionType = "mwak";
+
+    // Damage
+    templateParameters.damageParts = [["1 + @mod", "kinetic"]];
+    templateParameters.damageVersatile = "";
+
+    // Save
+    templateParameters.saveAbility = "";
+    templateParameters.saveDc = null;
+    templateParameters.saveScaling = "power";
+
+    // Weapon Type
+    templateParameters.weaponType = "natural";
+
+    // Properties
+    templateParameters.propertyAmmunition = false;
+    templateParameters.propertyAuto = false;
+    templateParameters.propertyBurst = false;
+    templateParameters.propertyDefensive = false;
+    templateParameters.propertyDexterityRqmt = false;
+    templateParameters.propertyDire = false;
+    templateParameters.propertyDisarming = false;
+    templateParameters.propertyDisguised = false;
+    templateParameters.propertyDisintegrate = false;
+    templateParameters.propertyDisruptive = false;
+    templateParameters.propertyDouble = false;
+    templateParameters.propertyFinesse = false;
+    templateParameters.propertyFixed = false;
+    templateParameters.propertyFocus = false;
+    templateParameters.propertyHeavy = false;
+    templateParameters.propertyHidden = false;
+    templateParameters.propertyKeen = false;
+    templateParameters.propertyLight = false;
+    templateParameters.propertyLuminous = false;
+    templateParameters.propertyMighty = false;
+    templateParameters.propertyPiercing = false;
+    templateParameters.propertyRapid = false;
+    templateParameters.propertyReach = false;
+    templateParameters.propertyReload = false;
+    templateParameters.propertyReturning = false;
+    templateParameters.propertyShocking = false;
+    templateParameters.propertySilent = false;
+    templateParameters.propertySpecial = false;
+    templateParameters.propertyStrengthRqmt = false;
+    templateParameters.propertyThrown = false;
+    templateParameters.propertyTwoHanded = false;
+    templateParameters.propertyVersatile = false;
+    templateParameters.propertyVicious = false;
+
+    // Image
+    templateParameters.img = "icons/svg/mystery-man.svg";
+
+    db.push(weaponTemplate.template(templateParameters));
+}
+
 function generateWeaponDbFile(entries, filename) {
     let db = [];
+    let templateParameters = weaponTemplate.template.parameters;
+
+    generateUnarmedStrike(templateParameters, db);
 
     entries.map((entry) => {
-        let templateParameters = weaponTemplate.template.parameters;
-
         // Uncomment for debugging to display all of the api entries
         // console.log(entry);
 

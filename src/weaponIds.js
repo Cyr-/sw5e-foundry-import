@@ -52,6 +52,7 @@ module.exports = {
     Techblade: "wwumzQvxwoPyyuTX",
     Techstaff: "I6UqxtQec0NXW8gv",
     "Tranquilizer Rifle": "Lw6vUczorCLaGPFe",
+    "Unarmed Strike": "znMXEaqEAzwM6HSj",
     Vibroaxe: "8bcaFVQ91NKjrH2e",
     Vibrobaton: "X3EtJ3JgDWIPiED9",
     Vibroblade: "Axbve7PaSX9obY47",
