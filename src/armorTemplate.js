@@ -23,8 +23,8 @@ exports.template = parse({
         rarity: "",
         identified: true,
         activation: {
-            type: "",
-            cost: 0,
+            type: "{{activationType}}",
+            cost: "{{activationCost}}",
             condition: ""
         },
         duration: {
@@ -32,14 +32,14 @@ exports.template = parse({
             units: ""
         },
         target: {
-            value: null,
+            value: "{{targetValue}}",
             units: "",
-            type: ""
+            type: "{{targetType}}"
         },
         range: {
-            value: null,
+            value: "{{rangeValue}}",
             long: null,
-            units: ""
+            units: "{{rangeUnits}}"
         },
         uses: {
             value: 0,
@@ -52,12 +52,12 @@ exports.template = parse({
             amount: null
         },
         ability: null,
-        actionType: "",
+        actionType: "{{actionType}}",
         attackBonus: 0,
         chatFlavor: "",
         critical: null,
         damage: {
-            parts: [],
+            parts: "{{damageParts}}",
             versatile: ""
         },
         formula: "",
@@ -67,16 +67,56 @@ exports.template = parse({
             scaling: "spell"
         },
         armor: {
-            type: "heavy",
-            value: 17,
-            dex: 0
+            type: "{{armorType}}",
+            value: "{{armorValue}}",
+            dex: "{{armorDex}}"
         },
-        strength: 15,
-        stealth: true,
+        strength: "{{strength}}",
+        stealth: "{{stealth}}",
         proficient: false,
-        attributes: { spelldc: 10 },
+        attributes: {
+            spelldc: 10
+        },
+        properties: {
+            Absorptive: "{{propertyAbsorptive}}",
+            Agile: "{{propertyAgile}}",
+            Anchor: false,
+            Avoidant: "{{propertyAvoidant}}",
+            Barbed: false,
+            Bulky: "{{propertyBulky}}",
+            Charging: "{{propertyCharging}}",
+            Concealing: "{{propertyConcealing}}",
+            Cumbersome: "{{propertyCumbersome}}",
+            Gauntleted: false,
+            Imbalanced: "{{propertyImbalanced}}",
+            Impermeable: "{{propertyImpermeable}}",
+            Insulated: "{{propertyInsulated}}",
+            Interlocking: false,
+            Lambent: false,
+            Lightweight: false,
+            Magnetic: false,
+            Obscured: "{{propertyObscured}}",
+            Obtrusive: "{{propertyObtrusive}}",
+            Powered: false,
+            Reactive: "{{propertyReactive}}",
+            Regulated: "{{propertyRegulated}}",
+            Reinforced: "{{propertyReinforced}}",
+            Responsive: false,
+            Rigid: "{{propertyRigid}}",
+            Silent: "{{propertySilent}}",
+            Spiked: "{{propertySpiked}}",
+            Steadfast: false,
+            Strength: "{{propertyStrength}}",
+            Versatile: false
+        },
         cptooltipmode: "hid"
     },
-    flags: { dynamiceffects: { equipActive: false, alwaysActive: false, effects: [] } },
-    img: "systems/sw5e/packs/Icons/Armor/PHB/Assault%20Armor.webp"
+    flags: {
+        dynamiceffects: {
+            equipActive: false,
+            alwaysActive: false
+        }
+    },
+    effects: [],
+    img: "{{img}}"
 });

@@ -2,95 +2,6 @@ const fs = require("fs");
 const weaponIds = require("./weaponIds");
 const weaponTemplate = require("./weaponTemplate");
 
-function toTitleCase(str) {
-    return str.replace(/\b\w+/g, function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-}
-
-function generateUnarmedStrike(templateParameters, db) {
-    // Id
-    templateParameters._id = weaponIds["Unarmed Strike"];
-
-    // Name
-    templateParameters.name = "Unarmed Strike";
-
-    // Description
-    templateParameters.descriptionValue = "";
-
-    // Source
-    templateParameters.source = "PHB";
-
-    // Weight
-    templateParameters.weight = 0;
-
-    // Price
-    templateParameters.price = 0;
-
-    // Range
-    templateParameters.rangeValue = 5;
-    templateParameters.rangeLong = null;
-
-    // Consume
-    templateParameters.consumeType = "";
-    templateParameters.consumeAmount = null;
-
-    // Action Type
-    templateParameters.actionType = "mwak";
-
-    // Damage
-    templateParameters.damageParts = [["1 + @mod", "kinetic"]];
-    templateParameters.damageVersatile = "";
-
-    // Save
-    templateParameters.saveAbility = "";
-    templateParameters.saveDc = null;
-    templateParameters.saveScaling = "power";
-
-    // Weapon Type
-    templateParameters.weaponType = "natural";
-
-    // Properties
-    templateParameters.propertyAmmunition = false;
-    templateParameters.propertyAuto = false;
-    templateParameters.propertyBurst = false;
-    templateParameters.propertyDefensive = false;
-    templateParameters.propertyDexterityRqmt = false;
-    templateParameters.propertyDire = false;
-    templateParameters.propertyDisarming = false;
-    templateParameters.propertyDisguised = false;
-    templateParameters.propertyDisintegrate = false;
-    templateParameters.propertyDisruptive = false;
-    templateParameters.propertyDouble = false;
-    templateParameters.propertyFinesse = false;
-    templateParameters.propertyFixed = false;
-    templateParameters.propertyFocus = false;
-    templateParameters.propertyHeavy = false;
-    templateParameters.propertyHidden = false;
-    templateParameters.propertyKeen = false;
-    templateParameters.propertyLight = false;
-    templateParameters.propertyLuminous = false;
-    templateParameters.propertyMighty = false;
-    templateParameters.propertyPiercing = false;
-    templateParameters.propertyRapid = false;
-    templateParameters.propertyReach = false;
-    templateParameters.propertyReload = false;
-    templateParameters.propertyReturning = false;
-    templateParameters.propertyShocking = false;
-    templateParameters.propertySilent = false;
-    templateParameters.propertySpecial = false;
-    templateParameters.propertyStrengthRqmt = false;
-    templateParameters.propertyThrown = false;
-    templateParameters.propertyTwoHanded = false;
-    templateParameters.propertyVersatile = false;
-    templateParameters.propertyVicious = false;
-
-    // Image
-    templateParameters.img = "icons/svg/mystery-man.svg";
-
-    db.push(weaponTemplate.template(templateParameters));
-}
-
 function generateWeaponDbFile(entries, filename) {
     let db = [];
     let templateParameters = weaponTemplate.template.parameters;
@@ -101,7 +12,7 @@ function generateWeaponDbFile(entries, filename) {
         // Uncomment for debugging to display all of the api entries
         // console.log(entry);
 
-        const titleCaseName = toTitleCase(entry.name);
+        const titleCaseName = entry.name === entry.name.toUpperCase() ? entry.name : toTitleCase(entry.name);
 
         // Id
         templateParameters._id = weaponIds[titleCaseName];
@@ -246,7 +157,7 @@ function generateWeaponDbFile(entries, filename) {
         // Image
         templateParameters.img = `systems/sw5e/packs/Icons/${entry.weaponClassification
             .split(/(?=[A-Z])/)
-            .join("%20")}s/${titleCaseName.replace(" ", "%20")}.webp`;
+            .join("%20")}s/${titleCaseName.split(" ").join("%20")}.webp`;
 
         db.push(weaponTemplate.template(templateParameters));
     });
@@ -262,6 +173,12 @@ function generateWeaponDbFile(entries, filename) {
         }
 
         console.log(`Saved ${filename}.`);
+    });
+}
+
+function toTitleCase(str) {
+    return str.replace(/\b\w+/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
 }
 
@@ -288,6 +205,89 @@ function description(entry) {
     }
 
     return descriptionValue;
+}
+
+function generateUnarmedStrike(templateParameters, db) {
+    // Id
+    templateParameters._id = weaponIds["Unarmed Strike"];
+
+    // Name
+    templateParameters.name = "Unarmed Strike";
+
+    // Description
+    templateParameters.descriptionValue = "";
+
+    // Source
+    templateParameters.source = "PHB";
+
+    // Weight
+    templateParameters.weight = 0;
+
+    // Price
+    templateParameters.price = 0;
+
+    // Range
+    templateParameters.rangeValue = 5;
+    templateParameters.rangeLong = null;
+
+    // Consume
+    templateParameters.consumeType = "";
+    templateParameters.consumeAmount = null;
+
+    // Action Type
+    templateParameters.actionType = "mwak";
+
+    // Damage
+    templateParameters.damageParts = [["1 + @mod", "kinetic"]];
+    templateParameters.damageVersatile = "";
+
+    // Save
+    templateParameters.saveAbility = "";
+    templateParameters.saveDc = null;
+    templateParameters.saveScaling = "power";
+
+    // Weapon Type
+    templateParameters.weaponType = "natural";
+
+    // Properties
+    templateParameters.propertyAmmunition = false;
+    templateParameters.propertyAuto = false;
+    templateParameters.propertyBurst = false;
+    templateParameters.propertyDefensive = false;
+    templateParameters.propertyDexterityRqmt = false;
+    templateParameters.propertyDire = false;
+    templateParameters.propertyDisarming = false;
+    templateParameters.propertyDisguised = false;
+    templateParameters.propertyDisintegrate = false;
+    templateParameters.propertyDisruptive = false;
+    templateParameters.propertyDouble = false;
+    templateParameters.propertyFinesse = false;
+    templateParameters.propertyFixed = false;
+    templateParameters.propertyFocus = false;
+    templateParameters.propertyHeavy = false;
+    templateParameters.propertyHidden = false;
+    templateParameters.propertyKeen = false;
+    templateParameters.propertyLight = false;
+    templateParameters.propertyLuminous = false;
+    templateParameters.propertyMighty = false;
+    templateParameters.propertyPiercing = false;
+    templateParameters.propertyRapid = false;
+    templateParameters.propertyReach = false;
+    templateParameters.propertyReload = false;
+    templateParameters.propertyReturning = false;
+    templateParameters.propertyShocking = false;
+    templateParameters.propertySilent = false;
+    templateParameters.propertySpecial = false;
+    templateParameters.propertyStrengthRqmt = false;
+    templateParameters.propertyThrown = false;
+    templateParameters.propertyTwoHanded = false;
+    templateParameters.propertyVersatile = false;
+    templateParameters.propertyVicious = false;
+
+    // Image
+    templateParameters.img = "icons/svg/mystery-man.svg";
+
+    db.push(weaponTemplate.template(templateParameters));
 }
 
 exports.generateWeaponDbFile = generateWeaponDbFile;
