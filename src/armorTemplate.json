@@ -1,0 +1,120 @@
+{
+    "_id": {{ _id }},
+    "name": {{ name }},
+    "permission": {
+        "default": 0,
+        "vXYkFWX6qzvOu2jc": 3
+    },
+    "type": "equipment",
+    "data": {
+        "description": {
+            "value": {{ item.descriptionValue }},
+            "chat": "",
+            "unidentified": ""
+        },
+        "source": {{ item.source }},
+        "quantity": 1,
+        "weight": {{ item.weight }},
+        "price": {{ item.price }},
+        "attuned": false,
+        "equipped": false,
+        "rarity": "",
+        "identified": true,
+        "activation": {
+            "type": {{ item.activation.type }},
+            "cost": {{ item.activation.cost }},
+            "condition": ""
+        },
+        "duration": {
+            "value": null,
+            "units": ""
+        },
+        "target": {
+            "value": {{ item.target.value }},
+            "units": "",
+            "type": {{ item.target.type }}
+        },
+        "range": {
+            "value": {{ item.range.value }},
+            "long": null,
+            "units": {{ item.range.units }}
+        },
+        "uses": {
+            "value": 0,
+            "max": 0,
+            "per": null
+        },
+        "consume": {
+            "type": "",
+            "target": null,
+            "amount": null
+        },
+        "ability": null,
+        "actionType": {{ item.action.type }},
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": null,
+        "damage": {
+            "parts": {{ item.damage.parts }},
+            "versatile": ""
+        },
+        "formula": "",
+        "save": {
+            "ability": "",
+            "dc": null,
+            "scaling": "spell"
+        },
+        "armor": {
+            "type": {{ item.armor.type }},
+            "value": {{ item.armor.value }},
+            "dex": {{ item.armor.dex }}
+        },
+        "strength": {{ item.strength }},
+        "stealth": {{ item.stealth }},
+        "proficient": false,
+        "attributes": {
+            "spelldc": 10
+        },
+        "properties": {
+            "Absorptive": {{ item.property.absorptive }},
+            "Agile": {{ item.property.agile }},
+            "Anchor": false,
+            "Avoidant": {{ item.property.avoidant }},
+            "Barbed": false,
+            "Bulky": {{ item.property.bulky }},
+            "Charging": {{ item.property.charging }},
+            "Concealing": {{ item.property.concealing }},
+            "Cumbersome": {{ item.property.cumbersome }},
+            "Gauntleted": false,
+            "Imbalanced": {{ item.property.imbalanced }},
+            "Impermeable": {{ item.property.impermeable }},
+            "Insulated": {{ item.property.insulated }},
+            "Interlocking": false,
+            "Lambent": false,
+            "Lightweight": false,
+            "Magnetic": false,
+            "Obscured": {{ item.property.obscured }},
+            "Obtrusive": {{ item.property.obtrusive }},
+            "Powered": false,
+            "Reactive": {{ item.property.reactive }},
+            "Regulated": {{ item.property.regulated }},
+            "Reinforced": {{ item.property.reinforced }},
+            "Responsive": false,
+            "Rigid": {{ item.property.rigid }},
+            "Silent": {{ item.property.silent }},
+            "Spiked": {{ item.property.spiked }},
+            "Steadfast": false,
+            "Strength": {{ item.property.strength }},
+            "Versatile": false
+        },
+        "cptooltipmode": "hid"
+    },
+    "flags": {
+        "dynamiceffects": {
+            "equipActive": false,
+            "alwaysActive": false
+        }
+    },
+    "effects": [],
+    "img": {{ item.img }}
+}
