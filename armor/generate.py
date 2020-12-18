@@ -1,16 +1,31 @@
 import json
-from jinja2 import Environment, PackageLoader
+from jinja2 import Environment, PackageLoader, Template
 
 
-def generateArmorDbFile():
+def generateArmorDbFile(armors, fileName):
     db = []
 
-    env = Environment(loader=PackageLoader('app', 'templates'))
+    env = Environment(loader=PackageLoader('armor', '/'))
     env.filters['jsonify'] = json.dumps
+    
+    template = env.get_template('template.json')
 
-    template = env.get_template('armorTemplate.json')
+    for armor in armors:
+        item = {
+            '_id': '',
+            'name': armor['name'].title(),
+            'activation': {},
+            'target': {},
+            'range': {},
+            'action': {},
+            'damage': {},
+            'armor': {},
+            'properties': {},
+        }
 
-    print(template)
+        db.append(template.render(item = item))
+
+    print(db)
 
 
 #     entries.map((entry) => {
