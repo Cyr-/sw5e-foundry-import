@@ -1,8 +1,13 @@
 import json
 import requests
 
-r = requests.get("https://sw5eapi.azurewebsites.net/api/equipment")
-data = json.loads(r.text)
+from armor.generate import generateArmorDbFile
 
-for e in data:
-    print(e["equipmentCategory"])
+# r = requests.get("https://sw5eapi.azurewebsites.net/api/equipment")
+# equipment = json.loads(r.text)
+
+# weapons = [item for item in equipment if item['equipmentCategory'] == 'Weapon']
+
+# armors = [item for item in equipment if item['equipmentCategory'] == 'Armor']
+
+generateArmorDbFile()
