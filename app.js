@@ -1,6 +1,7 @@
 const axios = require("axios");
 const weaponImport = require("./src/weaponImport");
 const armorImport = require("./src/armorImport");
+const forcePowerImport = require("./src/forcePowerImport");
 
 axios
     .get("https://sw5eapi.azurewebsites.net/api/equipment")
@@ -12,13 +13,23 @@ axios
         );
     });
 
+// axios
+//     .get("https://sw5eapi.azurewebsites.net/api/equipment")
+//     .then((response) => response.data)
+//     .then((data) => {
+//         armorImport.generateArmorDbFile(
+//             data.filter((entry) => entry.equipmentCategory === "Armor"),
+//             "armor.db"
+//         );
+//     });
+
 axios
-    .get("https://sw5eapi.azurewebsites.net/api/equipment")
+    .get("https://sw5eapi.azurewebsites.net/api/power")
     .then((response) => response.data)
     .then((data) => {
-        armorImport.generateArmorDbFile(
-            data.filter((entry) => entry.equipmentCategory === "Armor"),
-            "armor.db"
+        forcePowerImport.generateForcePowerDbFile(
+            data.filter((entry) => entry.powerType === "Force"),
+            "forcepowers.db"
         );
     });
 
