@@ -13,6 +13,7 @@ def generateArmorDbFile(armors, fileName):
         item["name"] = item["name"].title()
         if item["description"]:
             item["description"] = item["description"].replace("\r\n", " ")
+        else item["description"] = ""
         item["activation"] = {}
         item["target"] = {}
         item["range"] = {}
@@ -61,6 +62,18 @@ def generateArmorDbFile(armors, fileName):
             "Strength": "Strength" in item["propertiesMap"]
         }
         item["img"] = ""
+
+        # Possible saving throws and whatnot
+        if item["properties"]["Spiked"]:
+            item["activation"] = {
+                "type": "special",
+                "cost": 1,
+                "condition": ""
+            }
+            item["duration"] = {
+                "value": "",
+                "units": ""
+            }
 
         db.append(template.render(item = item))
 
