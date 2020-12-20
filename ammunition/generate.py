@@ -1,5 +1,5 @@
-from armor.armorIds import armor_IDs
-from armor.template import template
+from ammunition.ammoIds import ammo_IDs
+from ammunition.template import template
 
 
 def generateArmorDbFile(armors, fileName):
@@ -8,7 +8,7 @@ def generateArmorDbFile(armors, fileName):
     for armor in armors:
 
         item = armor
-        item["_id"] = armor_IDs[item["name"].title()]
+        item["_id"] = ammo_IDs[item["name"].title()]
         item["name"] = item["name"].title()
         if item["description"]:
             item["description"] = item["description"].replace("\r\n", " ")

@@ -28,4 +28,4 @@ armor_IDs = {
     "Neutronium Mesh": "Om9o8i7e7p9Lf7MK",
     "Plastoid Composite": "NLMydRpa0dH7zCSj",
     "Quadanium Heavy Shield": "pXh1QKqdpswa9ONp"
-};
+}
