@@ -13,7 +13,9 @@ def generateArmorDbFile(armors, fileName):
         item["name"] = item["name"].title()
         if item["description"]:
             item["description"] = item["description"].replace("\r\n", " ")
-        else item["description"] = ""
+        else:
+            item["description"] = ""
+        item["description"] = "<p>" + str(item["properties"]).replace("[","").replace("]","").replace("'","").title() + "<\p><p>" + item["description"] + "</p>"
         item["activation"] = {}
         item["target"] = {}
         item["range"] = {}
@@ -65,6 +67,12 @@ def generateArmorDbFile(armors, fileName):
 
         # Possible saving throws and whatnot
         if item["properties"]["Spiked"]:
+            # get damage die
+            item["damageRoll"] = item["propertiesMap"]["Spiked"].split(" ")[1]
+            # remove parens
+            item["damageRoll"] = item["damageRoll"].replace("(", "").replace(")", "")
+            item["damageRoll"] += " + @mod"
+            item["damageType"] = "kinetic"
             item["activation"] = {
                 "type": "special",
                 "cost": 1,
@@ -73,6 +81,16 @@ def generateArmorDbFile(armors, fileName):
             item["duration"] = {
                 "value": "",
                 "units": ""
+            }
+            item["target"] = {
+                "value": 1,
+                "units": "",
+                "type": "enemy"
+            }
+            item["range"] = {
+                "value": 5,
+                "long": "",
+                "units": "ft"
             }
 
         db.append(template.render(item = item))
