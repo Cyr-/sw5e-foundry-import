@@ -18,14 +18,18 @@ def getId(item):
 
 
 path = r"C:\Users\William\AppData\Local\FoundryVTT\Data\systems\sw5e - original\packs\packs"
-db = "adventuringGear.db"
-
-output_file = open("adventuringGearIds.py", "w")
-
-PHB = []
-WH = []
+db = "*.db"
 
 for filename in glob.glob(os.path.join(path, db)):
+	if os.path.basename(filename) == "tables.db":
+		continue
+	outputFileName = filename.replace(".db", "_Ids.py")
+	
+	output_file = open(outputFileName, "w")
+
+	PHB = []
+	WH = []
+
     with open(os.path.join(os.getcwd(), filename), 'r', encoding="utf-8") as f:
         lines = f.readlines()
         for line in lines:
@@ -33,20 +37,28 @@ for filename in glob.glob(os.path.join(path, db)):
                 item = json.loads(line)
                 # do stuff
                 if "source" in item["data"] and item["data"]["source"] == "PHB":
-                    PHB.append("\"" + getName(item) + "\": \"" + getId(item) + "\",\n")
+                    PHB.append("\"" + getName(item) + "\": \"" + getId(item) + "\"")
                 elif "source" in item["data"] and item["data"]["source"] == "WH":
-                    WH.append("\"" + getName(item) + "\": \"" + getId(item) + "\",\n")
+                    WH.append("\"" + getName(item) + "\": \"" + getId(item) + "\"")
             except(ValueError):
                 # we got a None and it breaks json for some reason..
-                continue
+                # continue
+				print("Encountered 'None', ignoring..")
         f.close()
-
-output_file.write("adventuringGear_IDs = {\n\t# PHB\n")
-for e in PHB:
-    output_file.write("\t" + str(e))
-output_file.write("\n\t# WH\n")
-for e in WH:
-    output_file.write("\t" + str(e))
-# don't forget to remove the comma on the last entry
-output_file.write("}")
-output_file.close()
+		
+	output_file.write(outputFileName.replace(".py", "") + " = {\n\t# PHB\n")
+	for i, e in enumerate(PHB):
+		if i > 0:
+			output_file.write(",\n\t" + str(e))
+		else:
+			output_file.write("\t" + str(e))
+	if len(WH) > 0:
+		output_file.write(",\n\n\t# WH\n")
+		for i, e in enumerate(WH):
+			if i > 0:
+				output_file.write(",\n\t" + str(e))
+			else:
+				output_file.write("\t" + str(e))
+	# don't forget to remove the comma on the last entry
+	output_file.write("\n}")
+	output_file.close()
