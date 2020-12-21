@@ -5,7 +5,7 @@ import glob
 
 def getName(item):
     if item["name"]:
-        return item["name"]
+        return item["name"].title()
     else:
         return ""
 
@@ -21,14 +21,14 @@ path = r"C:\Users\William\AppData\Local\FoundryVTT\Data\systems\sw5e - original\
 db = "*.db"
 
 for filename in glob.glob(os.path.join(path, db)):
-	if os.path.basename(filename) == "tables.db":
-		continue
-	outputFileName = filename.replace(".db", "_Ids.py")
-	
-	output_file = open(outputFileName, "w")
+    if os.path.basename(filename) == "tables.db":
+        continue
+    outputFileName = os.path.basename(filename.replace(".db", "_Ids.py"))
 
-	PHB = []
-	WH = []
+    output_file = open(outputFileName, "w")
+
+    PHB = []
+    WH = []
 
     with open(os.path.join(os.getcwd(), filename), 'r', encoding="utf-8") as f:
         lines = f.readlines()
@@ -43,22 +43,26 @@ for filename in glob.glob(os.path.join(path, db)):
             except(ValueError):
                 # we got a None and it breaks json for some reason..
                 # continue
-				print("Encountered 'None', ignoring..")
+                print("Encountered 'None', ignoring..")
         f.close()
-		
-	output_file.write(outputFileName.replace(".py", "") + " = {\n\t# PHB\n")
-	for i, e in enumerate(PHB):
-		if i > 0:
-			output_file.write(",\n\t" + str(e))
-		else:
-			output_file.write("\t" + str(e))
-	if len(WH) > 0:
-		output_file.write(",\n\n\t# WH\n")
-		for i, e in enumerate(WH):
-			if i > 0:
-				output_file.write(",\n\t" + str(e))
-			else:
-				output_file.write("\t" + str(e))
-	# don't forget to remove the comma on the last entry
-	output_file.write("\n}")
-	output_file.close()
+
+    # sort the arrays
+    PHB = sorted(PHB)
+    WH = sorted(WH)
+
+    # Generate output file
+    output_file.write(outputFileName.replace(".py", "") + " = {\n    # PHB\n")
+    for i, e in enumerate(PHB):
+        if i > 0:
+            output_file.write(",\n    " + str(e))
+        else:
+            output_file.write("    " + str(e))
+    if len(WH) > 0:
+        output_file.write(",\n\n    # WH\n")
+        for i, e in enumerate(WH):
+            if i > 0:
+                output_file.write(",\n    " + str(e))
+            else:
+                output_file.write("    " + str(e))
+    output_file.write("\n}\n")
+    output_file.close()

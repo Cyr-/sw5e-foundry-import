@@ -1,4 +1,4 @@
-from armor.armorIds import armor_IDs
+from armor.armor_Ids import armor_Ids
 from armor.template import template
 
 
@@ -7,7 +7,7 @@ def generateArmorDbFile(armors, fileName):
 
     for armor in armors:
         item = armor
-        item["_id"] = armor_IDs[item["name"].title()]
+        item["_id"] = armor_Ids[item["name"].title()]
         item["name"] = item["name"].title()
         item["description"] = generateDescription(item)
         item["activation"] = {
@@ -121,7 +121,7 @@ def generateDescription(item):
         "Strength" in item["propertiesMap"] and item["propertiesMap"]["Strength"]
     ]
 
-    filteredPropertyValues = [property for property in propertyValues if not property]  # same thing as != False
+    filteredPropertyValues = [property for property in propertyValues if property]
 
     if filteredPropertyValues:
         separator = ", "

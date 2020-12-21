@@ -1,4 +1,4 @@
-armor_IDs = {
+armor_Ids = {
     # PHB
     "Assault Armor": "HTfREA5DHvgAfIgP",
     "Battle Armor": "MMVavuHN6nClZvkH",
