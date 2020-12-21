@@ -6,72 +6,78 @@ def generateArmorDbFile(armors, fileName):
     db = []
 
     for armor in armors:
-
         item = armor
         item["_id"] = armor_IDs[item["name"].title()]
         item["name"] = item["name"].title()
-        if item["description"]:
-            item["description"] = item["description"].replace("\r\n", " ")
-        else:
-            item["description"] = ""
-        item["description"] = "<p>" + str(item["properties"]).replace("[", "").replace("]", "").replace("'", "").title() + "</p><p>" + item["description"] + "</p>"
-        item["activation"] = {}
+        item["description"] = generateDescription(item)
+        item["activation"] = {
+            "cost": 0
+        }
         item["target"] = {}
         item["range"] = {}
         item["action"] = {}
         item["damage"] = {}
         item["armorClassification"] = item["armorClassification"].lower()
         item["ac"] = item["ac"].split(" ")
-        item["armorValue"] = item["ac"][0]
-        if item["armorClassification"] == "light":
-            item["armorDex"] = ""
+        item["armorValue"] = item["ac"][0].replace("+", "")
+        if item["armorClassification"] == "light" or item["armorClassification"] == "shield":
+            item["armorDex"] = None
         elif item["armorClassification"] == "medium":
             item["armorDex"] = 2
         elif item["armorClassification"] == "heavy":
             item["armorDex"] = 0
         if "Strength" in item["propertiesMap"]:
-            item["strengthRequirement"] = item["propertiesMap"]["Strength"]
+            item["strengthRequirement"] = item["propertiesMap"]["Strength"].lower().replace("strength ", "")
+        else:
+            item["strengthRequirement"] = 0
+        if "obtrusive" in [property.lower() for property in item["properties"]]:
+            item["stealthDisadvantage"] = "true"
+        else:
+            item["stealthDisadvantage"] = str(item["stealthDisadvantage"]).lower()
         item["properties"] = {
-            "Absorptive": "Absorptive" in item["propertiesMap"],
-            "Agile": "Agile" in item["propertiesMap"],
-            "Anchor": "Anchor" in item["propertiesMap"],
-            "Avoidant": "Avoidant" in item["propertiesMap"],
-            "Barbed": "Barbed" in item["propertiesMap"],
-            "Bulky": "Bulky" in item["propertiesMap"],
-            "Charging": "Charging" in item["propertiesMap"],
-            "Concealing": "Concealing" in item["propertiesMap"],
-            "Cumbersome": "Cumbersome" in item["propertiesMap"],
-            "Gauntleted": "Gauntleted" in item["propertiesMap"],
-            "Imbalanced": "Imbalanced" in item["propertiesMap"],
-            "Impermeable": "Impermeable" in item["propertiesMap"],
-            "Insulated": "Insulated" in item["propertiesMap"],
-            "Interlocking": "Interlocking" in item["propertiesMap"],
-            "Lambent": "Lambent" in item["propertiesMap"],
-            "Lightweight": "Lightweight" in item["propertiesMap"],
-            "Magnetic": "Magnetic" in item["propertiesMap"],
-            "Obscured": "Obscured" in item["propertiesMap"],
-            "Obtrusive": "Obtrusive" in item["propertiesMap"],
-            "Powered": "Powered" in item["propertiesMap"],
-            "Reactive": "Reactive" in item["propertiesMap"],
-            "Regulated": "Regulated" in item["propertiesMap"],
-            "Reinforced": "Reinforced" in item["propertiesMap"],
-            "Responsive": "Responsive" in item["propertiesMap"],
-            "Rigid": "Rigid" in item["propertiesMap"],
-            "Silent": "Silent" in item["propertiesMap"],
-            "Spiked": "Spiked" in item["propertiesMap"],
-            "Steadfast": "Steadfast" in item["propertiesMap"],
-            "Strength": "Strength" in item["propertiesMap"]
+            "absorptive": "true" if "Absorptive" in item["propertiesMap"] else "false",
+            "agile": "true" if "Agile" in item["propertiesMap"] else "false",
+            "anchor": "true" if "Anchor" in item["propertiesMap"] else "false",
+            "avoidant": "true" if "Avoidant" in item["propertiesMap"] else "false",
+            "barbed": "true" if "Barbed" in item["propertiesMap"] else "false",
+            "bulky": "true" if "Bulky" in item["propertiesMap"] else "false",
+            "charging": "true" if "Charging" in item["propertiesMap"] else "false",
+            "concealing": "true" if "Concealing" in item["propertiesMap"] else "false",
+            "cumbersome": "true" if "Cumbersome" in item["propertiesMap"] else "false",
+            "gauntleted": "true" if "Gauntleted" in item["propertiesMap"] else "false",
+            "imbalanced": "true" if "Imbalanced" in item["propertiesMap"] else "false",
+            "impermeable": "true" if "Impermeable" in item["propertiesMap"] else "false",
+            "insulated": "true" if "Insulated" in item["propertiesMap"] else "false",
+            "interlocking": "true" if "Interlocking" in item["propertiesMap"] else "false",
+            "lambent": "true" if "Lambent" in item["propertiesMap"] else "false",
+            "lightweight": "true" if "Lightweight" in item["propertiesMap"] else "false",
+            "magnetic": "true" if "Magnetic" in item["propertiesMap"] else "false",
+            "obscured": "true" if "Obscured" in item["propertiesMap"] else "false",
+            "obtrusive": "true" if "obtrusive" in [property.lower() for property in item["properties"]] else "false",
+            "powered": "true" if "Powered" in item["propertiesMap"] else "false",
+            "reactive": "true" if "Reactive" in item["propertiesMap"] else "false",
+            "regulated": "true" if "Regulated" in item["propertiesMap"] else "false",
+            "reinforced": "true" if "Reinforced" in item["propertiesMap"] else "false",
+            "responsive": "true" if "Responsive" in item["propertiesMap"] else "false",
+            "rigid": "true" if "Rigid" in item["propertiesMap"] else "false",
+            "silent": "true" if "Silent" in item["propertiesMap"] else "false",
+            "spiked": "true" if "Spiked" in item["propertiesMap"] else "false",
+            "steadfast": "true" if "Steadfast" in item["propertiesMap"] else "false",
+            "strength": "true" if "Strength" in item["propertiesMap"] else "false"
         }
-        item["img"] = ""
+        item["img"] = "systems/sw5e/packs/Icons/Armor/" + item["contentSource"] + "/" + item["name"].title().replace(" ", "%20") + ".webp"
 
         # Possible saving throws and whatnot
-        if item["properties"]["Spiked"]:
+        if "Spiked" in item["propertiesMap"]:
             # get damage die
             item["damageRoll"] = item["propertiesMap"]["Spiked"].split(" ")[1]
             # remove parens
             item["damageRoll"] = item["damageRoll"].replace("(", "").replace(")", "")
             item["damageRoll"] += " + @mod"
             item["damageType"] = "kinetic"
+            item["action"] = {
+                "type": "other"
+            }
             item["activation"] = {
                 "type": "special",
                 "cost": 1,
@@ -92,8 +98,36 @@ def generateArmorDbFile(armors, fileName):
                 "units": "ft"
             }
 
-        db.append(template.render(item=item))
+        db.append(item)
 
-    with open(fileName, "a") as file:
+    db.sort(key=lambda item: item["_id"])
+
+    with open("output/" + fileName, "w") as file:
         for line in db:
-            file.write(line + "\n")
+            file.write(template.render(item=line) + "\n")
+
+
+def generateDescription(item):
+    description = ""
+
+    propertyValues = [
+        "Absorptive" in item["propertiesMap"] and item["propertiesMap"]["Absorptive"],
+        "Agile" in item["propertiesMap"] and item["propertiesMap"]["Agile"],
+        "Avoidant" in item["propertiesMap"] and item["propertiesMap"]["Avoidant"],
+        "Charging" in item["propertiesMap"] and item["propertiesMap"]["Charging"],
+        "Insulated" in item["propertiesMap"] and item["propertiesMap"]["Insulated"],
+        "Reactive" in item["propertiesMap"] and item["propertiesMap"]["Reactive"],
+        "Spiked" in item["propertiesMap"] and item["propertiesMap"]["Spiked"],
+        "Strength" in item["propertiesMap"] and item["propertiesMap"]["Strength"]
+    ]
+
+    filteredPropertyValues = [property for property in propertyValues if not property]  # same thing as != False
+
+    if filteredPropertyValues:
+        separator = ", "
+        description += "<p>" + separator.join([property.title() for property in filteredPropertyValues]) + "</p>"
+
+    if item["description"]:
+        description += "<p>" + item["description"].replace("\r", "").replace("\n", " ") + "</p>"
+
+    return description
