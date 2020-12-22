@@ -1,0 +1,4 @@
+fightingstyles_Ids = {
+    # PHB
+
+}

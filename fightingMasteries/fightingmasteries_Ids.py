@@ -1,0 +1,4 @@
+fightingmasteries_Ids = {
+    # PHB
+
+}
