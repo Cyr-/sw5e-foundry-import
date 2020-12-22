@@ -1,6 +1,6 @@
-import json
-from armor.armorIds import armor_IDs
 from armor.template import template
+from utilities.paths import arm_path
+from utilities.SW5e_ID_Mgmt import getID
 
 
 def generateArmorDbFile(armors, fileName):
@@ -8,7 +8,7 @@ def generateArmorDbFile(armors, fileName):
 
     for armor in armors:
         item = armor
-        item["_id"] = armor_IDs[item["name"].title()]
+        item["_id"] = getID(item["name"], arm_path)
         item["name"] = item["name"].title()
         item["description"] = generateDescription(item)
         item["activation"] = {
@@ -66,7 +66,7 @@ def generateArmorDbFile(armors, fileName):
             "steadfast": "true" if "Steadfast" in item["propertiesMap"] else "false",
             "strength": "true" if "Strength" in item["propertiesMap"] else "false"
         }
-        item["img"] = "systems/sw5e/packs/Icons/Armor/" + item["contentSource"] + "/" + item["name"].title().replace(" ","%20") + ".webp"
+        item["img"] = "systems/sw5e/packs/Icons/Armor/" + item["contentSource"] + "/" + item["name"].title().replace(" ", "%20") + ".webp"
 
         # Possible saving throws and whatnot
         if "Spiked" in item["propertiesMap"]:
@@ -105,7 +105,7 @@ def generateArmorDbFile(armors, fileName):
 
     with open("output/" + fileName, "w") as file:
         for line in db:
-            file.write(template.render(item = line) + "\n")
+            file.write(template.render(item=line) + "\n")
 
 
 def generateDescription(item):
@@ -122,7 +122,7 @@ def generateDescription(item):
         "Strength" in item["propertiesMap"] and item["propertiesMap"]["Strength"]
     ]
 
-    filteredPropertyValues = [property for property in propertyValues if property != False]
+    filteredPropertyValues = [property for property in propertyValues if property]
 
     if filteredPropertyValues:
         separator = ", "

@@ -1,6 +1,10 @@
 import json
 import requests
+import pickle
 
+from utilities.paths import pickle_to_dict
+
+# generate imports
 from armor.generate import generateArmorDbFile
 
 r = requests.get("https://sw5eapi.azurewebsites.net/api/equipment")
@@ -24,5 +28,13 @@ communications = [item for item in equipment if item['equipmentCategory'] == 'Co
 ammunitions = [item for item in equipment if item['equipmentCategory'] == 'Ammunition']
 alcoholicBeverages = [item for item in equipment if item['equipmentCategory'] == 'AlcoholicBeverage']
 explosives = [item for item in equipment if item['equipmentCategory'] == 'Explosive']
+
+# iterate through all the pickle paths
+for path in pickle_to_dict.keys():
+    if not path.exists():
+        # pickle file does not exists, therefore this is the first time
+        # this is being run on this system
+        pickle.dump(pickle_to_dict[path], open(path, "wb"))
+
 
 generateArmorDbFile(armors, 'armor.db')
