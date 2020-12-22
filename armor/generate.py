@@ -1,4 +1,5 @@
 import json
+
 from armor.armorIds import armor_IDs
 from armor.template import template
 

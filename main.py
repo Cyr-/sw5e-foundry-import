@@ -2,6 +2,7 @@ import json
 import requests
 
 from armor.generate import generateArmorDbFile
+from weapon.generate import generateWeaponDbFile
 
 r = requests.get("https://sw5eapi.azurewebsites.net/api/equipment")
 equipment = json.loads(r.text)
@@ -25,4 +26,5 @@ ammunitions = [item for item in equipment if item['equipmentCategory'] == 'Ammun
 alcoholicBeverages = [item for item in equipment if item['equipmentCategory'] == 'AlcoholicBeverage']
 explosives = [item for item in equipment if item['equipmentCategory'] == 'Explosive']
 
+generateWeaponDbFile(weapons, 'weapons.db')
 generateArmorDbFile(armors, 'armor.db')
