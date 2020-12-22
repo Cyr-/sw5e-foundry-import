@@ -38,5 +38,7 @@ for path in pickle_to_dict.keys():
         pickle.dump(pickle_to_dict[path], open(path, "wb"))
 
 
-# generateArmorDbFile(armors, 'armor.db')
-generateAdventuringGearDbFile(ammunitions, "adventuringgear.db")
+generateArmorDbFile(armors, 'armor.db')
+
+ag_items = ammunitions + explosives
+generateAdventuringGearDbFile(ag_items, "adventuringgear.db")
