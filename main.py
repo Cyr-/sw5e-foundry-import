@@ -6,7 +6,7 @@ from utilities.paths import pickle_to_dict
 
 # generate imports
 from armor.generate import generateArmorDbFile
-from weapon.generate import generateWeaponDbFile
+from weapons.generate import generateWeaponDbFile
 
 r = requests.get("https://sw5eapi.azurewebsites.net/api/equipment")
 equipment = json.loads(r.text)
