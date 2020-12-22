@@ -1,6 +1,5 @@
 enhanceditems_Ids = {
     # PHB
-,
 
     # WH
     "Alacrity Adrenal": "GJF5IVD6eChBTX1x",
