@@ -29,6 +29,7 @@ for filename in glob.glob(os.path.join(path, db)):
 
     PHB = []
     WH = []
+    EC = []
 
     with open(os.path.join(os.getcwd(), filename), 'r', encoding="utf-8") as f:
         lines = f.readlines()
@@ -40,6 +41,8 @@ for filename in glob.glob(os.path.join(path, db)):
                     PHB.append("\"" + getName(item) + "\": \"" + getId(item) + "\"")
                 elif "source" in item["data"] and item["data"]["source"] == "WH":
                     WH.append("\"" + getName(item) + "\": \"" + getId(item) + "\"")
+                elif "source" in item["data"] and item["data"]["source"] == "EC":
+                    EC.append("\"" + getName(item) + "\": \"" + getId(item) + "\"")
             except(ValueError):
                 # we got a None and it breaks json for some reason..
                 # continue
@@ -49,17 +52,27 @@ for filename in glob.glob(os.path.join(path, db)):
     # sort the arrays
     PHB = sorted(PHB)
     WH = sorted(WH)
+    EC = sorted(EC)
 
     # Generate output file
-    output_file.write(outputFileName.replace(".py", "") + " = {\n    # PHB\n")
-    for i, e in enumerate(PHB):
-        if i > 0:
-            output_file.write(",\n    " + str(e))
-        else:
-            output_file.write("    " + str(e))
+    output_file.write(outputFileName.replace(".py", "") + " = {")
+    if len(PHB) > 0:
+        output_file.write("\n    # PHB\n")
+        for i, e in enumerate(PHB):
+            if i > 0:
+                output_file.write(",\n    " + str(e))
+            else:
+                output_file.write("    " + str(e))
     if len(WH) > 0:
         output_file.write(",\n\n    # WH\n")
         for i, e in enumerate(WH):
+            if i > 0:
+                output_file.write(",\n    " + str(e))
+            else:
+                output_file.write("    " + str(e))
+    if len(EC) > 0:
+        output_file.write(",\n\n    # EC\n")
+        for i, e in enumerate(EC):
             if i > 0:
                 output_file.write(",\n    " + str(e))
             else:
