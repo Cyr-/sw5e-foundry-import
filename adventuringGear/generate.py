@@ -2,6 +2,7 @@ from adventuringGear.template import ammoTemplate
 from adventuringGear.template import explosiveTemplate
 from adventuringGear.template import utilityTemplate
 from adventuringGear.template import kitTemplate
+from adventuringGear.template import medicalTemplate
 from utilities.paths import ag_path
 from utilities.SW5e_ID_Mgmt import getID
 import re
@@ -57,6 +58,62 @@ def generateKitEntry(item):
     return kitTemplate.render(item=item) + "\n"
 
 
+def generateMedicalEntry(item):
+    item = getBasicInfo(item)
+    actionRegex = r"[Aa]{1}s an action"
+    actionMatch = re.search(actionRegex, item["description"])
+    if actionMatch:
+        item["activation"] = {
+            "type": "action",
+            "cost": 1,
+            "condition": ""
+        }
+        item["range"] = {
+            "value": 5,
+            "units": "ft"
+        }
+    else:
+        item["activation"] = {
+            "type": "",
+            "cost": 0,
+            "condition": ""
+        }
+    durationRegex = r"for (\d+) ([hour|hours|minute|minutes|day|days|round|rounds|turn|turns])"
+    durationMatch = re.search(durationRegex, item["description"])
+    if durationMatch:
+        item["duration"] = {
+            "value": durationMatch.group(1),
+            "units": durationMatch.group(2)
+        }
+    # I was going to do this via regex, but the descriptions aren't unique enough..
+    if item["name"] == "Antitoxkit" or "Medpac" or "Poison" or "Traumakit":
+        item["target"] = {
+            "value": 1,
+            "units": "",
+            "type": "creature"
+        }
+    elif item["name"] == "Emergency Battery" or "Repair Kit":
+        item["target"] = {
+            "value": 1,
+            "units": "",
+            "type": "droid"
+        }
+    chargesRegex = r"has (\d+) charges"
+    usesRegex = r"has (\d+) uses"
+    timesRegex = r"stabalizes (\d+) times"
+    usesMatch = re.search(chargesRegex, item["description"])
+    if not usesMatch:
+        usesMatch = re.search(usesRegex, item["description"])
+    if not usesMatch:
+        usesMatch = re.search(timesRegex, item["description"])
+    if usesMatch:
+        item["uses"] = {
+            "value": usesMatch.group(1),
+            "max": usesMatch.group(1)
+        }
+    return medicalTemplate.render(item=item) + "\n"
+
+
 def generateAdventuringGearDbFile(items, fileName):
     db = []
 
@@ -69,6 +126,8 @@ def generateAdventuringGearDbFile(items, fileName):
             db.append(generateUtilityEntry(item))
         elif item["equipmentCategory"] == "Kit":
             db.append(generateKitEntry(item))
+        elif item["equipmentCategory"] == "Medical":
+            db.append(generateMedicalEntry(item))
 
     # db.sort(key=lambda item: item["_id"])
     db = sorted(db)
