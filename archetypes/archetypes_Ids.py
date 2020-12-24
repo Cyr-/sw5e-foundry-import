@@ -62,7 +62,7 @@ archetypes_Ids = {
     "Explorer Pursuit": "rhte8G7Duf9dtKLV",
     "Form I: Shii-Cho": "cROcc25Zj1MT6Yf6",
     "Form Iv: Ataru": "9Hva27QHj2ruQXTA",
-    "Form Ix: Tr‡kata": "ucmQpCjxdEN6tpxD",
+    "Form Ix: Tr√†kata": "ucmQpCjxdEN6tpxD",
     "Form Vii: Juyo/Vapaad": "3yOiMsM439IfwEBm",
     "Form Viii: Sokan": "t5LS6epj3270S38n",
     "Form X: Jar'Kai": "pr7Xe82MOaof0IXj",
