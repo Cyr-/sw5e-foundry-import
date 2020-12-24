@@ -75,5 +75,31 @@ feats_Ids = {
     "Prone Combatant": "tc0x7wRpNsW1O2Zz",
     "Savage Shorty": "XuhxzosKJIBWpWHU",
     "Shard Modification": "ua8SMi9eB45JvLvn",
-    "Tiny Terror": "q7ahgoAYWA5ghy81"
+    "Tiny Terror": "q7ahgoAYWA5ghy81",
+
+    # EC
+    "Adaptive Training": "XRtb4NmElyRsERrk",
+    "Blinding Agility": "vesMmgkOBAQLvIEU",
+    "Close Quarters Caster": "VSXqyHXrw1kI3X91",
+    "Combat Caster": "dAmUh0ASLU1xshOs",
+    "Cunning Intellect": "eqBlqioFPauxq798",
+    "Dual Focused Caster": "h9fsZnfh6RP9PiZv",
+    "Exalted Awareness": "ccsjgZgwSyw3r0on",
+    "Expert Potency": "k316FEnj9NARisTU",
+    "Focused Vitality": "YfISDL99fjJ9WYy3",
+    "Kinetic Stoicism": "yOhhoeyIfccOM1JQ",
+    "Martial Adept": "1ZAghZJQflkZUVuG",
+    "Meditative Mindfulness": "cnf7zry702QLzotX",
+    "Mounted Caster": "kbN0CSXPaTs3mfan",
+    "Overwhelming Presence": "dWfbvXKx0ZDEEY4w",
+    "Precision Applications": "4svS5qc5vl445fsU",
+    "Quick Caster": "dQzURN2q97jG47Qo",
+    "Relentless Pursuer": "p9p9uvgtw0as7ecU",
+    "Serene Resolve": "W8VTyuB1D1pa4s4N",
+    "Sniping Caster": "3tOeQ7XLC7omOmIc",
+    "Tireless Outrider": "ig8TPZw7mt3jQqbi",
+    "Titan'S Power": "tVElcveiEV69LpMD",
+    "Unnatural Resilience": "T0pMXR5lUepOZWAu",
+    "Versatile Design": "drXPCTuKznN8IXBN",
+    "War Caster": "l16JW8IL3N6NSivU"
 }

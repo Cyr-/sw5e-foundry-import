@@ -1,4 +1,2 @@
 tradegoods_Ids = {
-    # PHB
-
 }
