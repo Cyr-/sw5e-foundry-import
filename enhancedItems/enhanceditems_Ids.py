@@ -1,5 +1,4 @@
-enhanceditems_Ids = {
-    # PHB
+enhanceditems_Ids = {,
 
     # WH
     "Alacrity Adrenal": "GJF5IVD6eChBTX1x",

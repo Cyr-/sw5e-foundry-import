@@ -1,4 +1,2 @@
 lightsaberforms_Ids = {
-    # PHB
-
 }

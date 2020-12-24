@@ -1,4 +1,2 @@
 fightingstyles_Ids = {
-    # PHB
-
 }
