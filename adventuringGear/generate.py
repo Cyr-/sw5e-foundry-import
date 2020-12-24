@@ -1,6 +1,7 @@
 from adventuringGear.template import ammoTemplate
 from adventuringGear.template import explosiveTemplate
 from adventuringGear.template import utilityTemplate
+from adventuringGear.template import kitTemplate
 from utilities.paths import ag_path
 from utilities.SW5e_ID_Mgmt import getID
 import re
@@ -51,6 +52,11 @@ def generateExplosiveEntry(item):
     return explosiveTemplate.render(item=item) + "\n"
 
 
+def generateKitEntry(item):
+    item = getBasicInfo(item)
+    return kitTemplate.render(item=item) + "\n"
+
+
 def generateAdventuringGearDbFile(items, fileName):
     db = []
 
@@ -61,6 +67,8 @@ def generateAdventuringGearDbFile(items, fileName):
             db.append(generateExplosiveEntry(item))
         elif item["equipmentCategory"] == "Utility":
             db.append(generateUtilityEntry(item))
+        elif item["equipmentCategory"] == "Kit":
+            db.append(generateKitEntry(item))
 
     # db.sort(key=lambda item: item["_id"])
     db = sorted(db)

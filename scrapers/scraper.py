@@ -8,7 +8,7 @@ out = []
 
 # whatever you need to scrape, just sling it in here
 for e in data:
-    if e["equipmentCategory"] == "Utility":
+    if e["equipmentCategory"] == "Kit":
         out.append(e)
 
 with open("out.txt", "w") as file:
