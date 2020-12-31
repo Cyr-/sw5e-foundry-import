@@ -6,6 +6,7 @@ from utilities.paths import pickle_to_dict
 
 # generate imports
 from armor.generate import generateArmorDbFile
+from weapons.generate import generateWeaponDbFile
 from adventuringGear.generate import generateAdventuringGearDbFile
 
 r = requests.get("https://sw5eapi.azurewebsites.net/api/equipment")
@@ -37,7 +38,7 @@ for path in pickle_to_dict.keys():
         # this is being run on this system
         pickle.dump(pickle_to_dict[path], open(path, "wb"))
 
-
+generateWeaponDbFile(weapons, 'weapons.db')
 generateArmorDbFile(armors, 'armor.db')
 
 ag_items = ammunitions + explosives + utilities + kits

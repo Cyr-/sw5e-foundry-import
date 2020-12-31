@@ -8,8 +8,8 @@ def generateArmorDbFile(armors, fileName):
 
     for armor in armors:
         item = armor
-        item["_id"] = getID(item["name"], arm_path)
         item["name"] = item["name"].title()
+        item["_id"] = getID(item["name"], arm_path)
         item["description"] = generateDescription(item)
         item["activation"] = {
             "cost": 0
