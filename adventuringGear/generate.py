@@ -9,8 +9,8 @@ import re
 
 
 def getBasicInfo(item):
-    item["_id"] = getID(item["name"], ag_path)
     item["name"] = item["name"].title()
+    item["_id"] = getID(item["name"], ag_path)
     if item["description"]:
         item["description"] = "<p>" + str(item["description"]).replace("\r", "").replace("\n", " ") + "</p>"
     else:
