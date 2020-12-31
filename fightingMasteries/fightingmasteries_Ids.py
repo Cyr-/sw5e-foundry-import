@@ -1,4 +1,2 @@
 fightingmasteries_Ids = {
-    # PHB
-
 }
