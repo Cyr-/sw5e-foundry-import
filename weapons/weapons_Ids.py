@@ -1,4 +1,4 @@
-weapon_IDs = {
+weapons_Ids = {
     # PHB
     "Assault Cannon": "2yAiZeQHZbNXjqUs",
     "Blaster Cannon": "atdw9BYBUaq3TBJc",

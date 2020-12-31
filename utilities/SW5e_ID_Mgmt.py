@@ -5,7 +5,6 @@ import pickle
 
 def getID(name, path):
     IDs = pickle.load(open(path, "rb"))
-    name = name.title()
     if name in IDs:
         return IDs[name]
     else:
