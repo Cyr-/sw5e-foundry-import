@@ -31,9 +31,9 @@ def generateUtilityEntry(item):
 
 def generateExplosiveEntry(item):
     item = getBasicInfo(item)
-    gren_mine_regex = r"ach creature within (\d+) feet [of it]* must make a DC (\d+) (\w+) saving throw. A creature takes (\d+d\d) (\w+) damage"
+    gren_mine_regex = r"Each creature within (\d+) feet [of it]* must make a DC (\d+) (\w+) saving throw. A creature takes (\d+d\d) (\w+) damage"
     charge_regex = r"(\d+)-foot cone. Each creature within the cone must make a DC (\d+) (\w+) saving throw, taking (\d+d\d) (\w+) damage"
-    match = re.search(gren_mine_regex, item["description"])
+    match = re.search(gren_mine_regex, item["description"], re.IGNORECASE)
     if not match:
         match = re.search(charge_regex, item["description"])
     if match:
@@ -60,8 +60,8 @@ def generateKitEntry(item):
 
 def generateMedicalEntry(item):
     item = getBasicInfo(item)
-    actionRegex = r"[Aa]{1}s an action"
-    actionMatch = re.search(actionRegex, item["description"])
+    actionRegex = r"as an action"
+    actionMatch = re.search(actionRegex, item["description"], re.IGNORECASE)
     if actionMatch:
         item["activation"] = {
             "type": "action",
