@@ -1,3 +1,5 @@
+import re
+
 from armor.template import template
 from utilities.paths import arm_path
 from utilities.SW5e_ID_Mgmt import getID
@@ -13,9 +15,18 @@ def generateArmorDbFile(armors, fileName):
         item["name"] = getName(item)
         item["_id"] = getID(item["name"], arm_path)
         item["description"] = generateDescription(item)
+
+        # check for fraction
+        fraction = re.search("/", item["weight"])
+        if fraction:
+            nums = item["weight"].split("/")
+            item["weight"] = int(nums[0])/int(nums[1])
+        else:
+            item["weight"] = int(item["weight"])
         item["activation"] = {
             "cost": 0
         }
+
         item["target"] = {}
         item["range"] = {}
         item["action"] = {}

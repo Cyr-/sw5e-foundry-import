@@ -16,8 +16,16 @@ def generateWeaponDbFile(weapons, fileName):
         item["_id"] = getID(item["name"], weap_path)
         item["description"] = generateDescription(item)
 
-        if item["weight"] == "1/4":
-            item["weight"] = "0.25"
+        # check for fraction
+        fraction = re.search("/", item["weight"])
+        if fraction:
+            nums = item["weight"].split("/")
+            item["weight"] = int(nums[0])/int(nums[1])
+        else:
+            item["weight"] = int(item["weight"])
+        item["activation"] = {
+            "cost": 0
+        }
 
         if item["name"] == "Bo-Rifle":
             generateBoRifle(db, item)
