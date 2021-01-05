@@ -1,3 +1,6 @@
+import re
+from word2number import w2n
+
 from adventuringGear.template import ammoTemplate
 from adventuringGear.template import explosiveTemplate
 from adventuringGear.template import utilityTemplate
@@ -5,7 +8,6 @@ from adventuringGear.template import kitTemplate
 from adventuringGear.template import medicalTemplate
 from utilities.paths import ag_path
 from utilities.SW5e_ID_Mgmt import getID
-import re
 
 
 def getBasicInfo(item):
@@ -15,6 +17,15 @@ def getBasicInfo(item):
         item["description"] = "<p>" + str(item["description"]).replace("\r", "").replace("\n", " ") + "</p>"
     else:
         item["description"] = ""
+
+    # check for fraction
+    fraction = re.search("/", item["weight"])
+    if fraction:
+        nums = item["weight"].split("/")
+        item["weight"] = int(nums[0])/int(nums[1])
+    else:
+        item["weight"] = int(item["weight"])
+
     item["img"] = "systems/sw5e/packs/Icons/" + item["equipmentCategory"] + "/" + item["contentSource"] + "/" + item["name"].title().replace(" ", "%20").replace(",", "") + ".webp"
     return item
 
@@ -78,7 +89,7 @@ def generateMedicalEntry(item):
             "cost": 0,
             "condition": ""
         }
-    durationRegex = r"for (\d+) ([hour|hours|minute|minutes|day|days|round|rounds|turn|turns])"
+    durationRegex = r"for (\d+) (hour|hours|minute|minutes|day|days|round|rounds|turn|turns?)"
     durationMatch = re.search(durationRegex, item["description"])
     if durationMatch:
         item["duration"] = {
@@ -98,9 +109,9 @@ def generateMedicalEntry(item):
             "units": "",
             "type": "droid"
         }
-    chargesRegex = r"has (\d+) charges"
-    usesRegex = r"has (\d+) uses"
-    timesRegex = r"stabalizes (\d+) times"
+    chargesRegex = r"has (\w+) charges"
+    usesRegex = r"has (\w+) uses"
+    timesRegex = r"stabilize (\d+) times"
     usesMatch = re.search(chargesRegex, item["description"])
     if not usesMatch:
         usesMatch = re.search(usesRegex, item["description"])
@@ -108,8 +119,8 @@ def generateMedicalEntry(item):
         usesMatch = re.search(timesRegex, item["description"])
     if usesMatch:
         item["uses"] = {
-            "value": usesMatch.group(1),
-            "max": usesMatch.group(1)
+            "value": w2n.word_to_num(str(usesMatch.group(1))),
+            "max": w2n.word_to_num(str(usesMatch.group(1)))
         }
     return medicalTemplate.render(item=item) + "\n"
 
