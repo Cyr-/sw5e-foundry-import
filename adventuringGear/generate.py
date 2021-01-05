@@ -3,6 +3,7 @@ from adventuringGear.template import explosiveTemplate
 from adventuringGear.template import utilityTemplate
 from adventuringGear.template import kitTemplate
 from adventuringGear.template import medicalTemplate
+from adventuringGear.template import instrumentTemplate
 from utilities.paths import ag_path
 from utilities.SW5e_ID_Mgmt import getID
 import re
@@ -114,6 +115,11 @@ def generateMedicalEntry(item):
     return medicalTemplate.render(item=item) + "\n"
 
 
+def generateInstrumentEntry(item):
+    item = getBasicInfo(item)
+    return instrumentTemplate.render(item=item) + "\n"
+
+
 def generateAdventuringGearDbFile(items, fileName):
     db = []
 
@@ -128,6 +134,8 @@ def generateAdventuringGearDbFile(items, fileName):
             db.append(generateKitEntry(item))
         elif item["equipmentCategory"] == "Medical":
             db.append(generateMedicalEntry(item))
+        elif item["equipmentCategory"] == "MusicalInstrument":
+            db.append(generateInstrumentEntry(item))
 
     # db.sort(key=lambda item: item["_id"])
     db = sorted(db)
