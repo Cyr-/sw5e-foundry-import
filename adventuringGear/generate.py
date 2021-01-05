@@ -135,21 +135,29 @@ def generateInstrumentEntry(item):
 
 def generateWeaponArmorAccessoryEntry(item):
     item = getBasicInfo(item)
-    if re.findall("slots", item["description"]) or re.findall("carry", item["description"]):
+    if re.findall("slots|carry|store", item["description"]):
         # backpack
         beltRegex = r"slots to hold ([\d\w]*) [\w ]*, and can be"
         bandoRegex = r"has (\d+) slots"
         vestRegex = r"carry up to (\d+) light items"
-        match = re.search(beltRegex, item["description"])
-        if not match:
-            match = re.search(bandoRegex, item["description"])
-        if not match:
-            match = re.search(vestRegex, item["description"])
-        if match:
-            item["capacityValue"] = w2n.word_to_num(str(match.group(1)))
+        holsterRegex = r"store a single weapon"
+        beltMatch = re.search(beltRegex, item["description"])
+        bandoMatch = re.search(bandoRegex, item["description"])
+        vestMatch = re.search(vestRegex, item["description"])
+        holsterMatch = re.search(holsterRegex, item["description"])
+        if beltMatch:
+            item["capacityValue"] = w2n.word_to_num(str(beltMatch.group(1)))
+        elif bandoMatch:
+            item["capacityValue"] = w2n.word_to_num(str(bandoMatch.group(1)))
+        elif vestMatch:
+            item["capacityValue"] = w2n.word_to_num(str(vestMatch.group(1)))
+        elif holsterMatch:
+            item["capacityValue"] = 1
         else:
             item["capactiyValue"] = 0
-    return backpackTemplate.render(item=item) + "\n"
+        return backpackTemplate.render(item=item) + "\n"
+    else:
+        return utilityTemplate.render(item=item) + "\n"
 
 
 def generateAdventuringGearDbFile(items, fileName):
@@ -160,7 +168,7 @@ def generateAdventuringGearDbFile(items, fileName):
             db.append(generateAmmoEntry(item))
         elif item["equipmentCategory"] == "Explosive":
             db.append(generateExplosiveEntry(item))
-        elif item["equipmentCategory"] == "Utility" or item["equipmentCategory"] == "Tool":
+        elif item["equipmentCategory"] == "Utility" or item["equipmentCategory"] =="Tool":
             db.append(generateUtilityEntry(item))
         elif item["equipmentCategory"] == "Kit":
             db.append(generateKitEntry(item))
