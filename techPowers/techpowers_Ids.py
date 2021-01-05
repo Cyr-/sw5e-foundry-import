@@ -7,7 +7,7 @@ techpowers_Ids = {
     "Acidic Strike": "50NdsRKVmM3FMPH0",
     "Alarm": "ZH0jkLKHJ54BmkYX",
     "Analyze": "PBFbcYIh4DK2EOdq",
-    "Antipathy/Sympathy": "8591z42KNanjfP0p",
+    "Antipathy/sympathy": "8591z42KNanjfP0p",  # TODO: Fix caps
     "Assess The Situation": "xAgbr9pfUcwf2FjB",
     "Autonomous Servant": "LKTlPR7noRV7VzLN",
     "Bacta Pack": "iG4M6N5PFqj9TfRW",
@@ -22,7 +22,7 @@ techpowers_Ids = {
     "Cloaking Screen": "3SB9A7cFFRezxu8Q",
     "Combustive Shot": "to84bBMy9F4zYZ5I",
     "Concealed Caltrops": "JAKN9PXNLmCSL3Ag",
-    "Condense/Vaporize": "Zk697eWSqME5gpkF",
+    "Condense/vaporize": "Zk697eWSqME5gpkF",  # TODO: Fix caps
     "Contingency": "8iAgtDKUbONDnAjN",
     "Copy": "7khirDTQvs7rtLbW",
     "Corrosive Sphere": "WOnLRapxYnS99uFT",
@@ -122,7 +122,7 @@ techpowers_Ids = {
     "Motivator Boost": "o9i0rEKiH5YLiVzj",
     "Neurotoxin": "0p4YthIRvLrxE1qx",
     "Oil Slick": "bp55Q4R0gBpd0FiM",
-    "On/Off": "E6OviwnCfEjRTx3X",
+    "On/off": "E6OviwnCfEjRTx3X",  # TODO: Fix caps
     "Overheat": "JZnbV9hvp3DZ2x49",
     "Overload": "1zfQEQMJqirKT6tR",
     "Override Interface": "NagD6z90jRyd7zOk",
@@ -164,7 +164,7 @@ techpowers_Ids = {
     "Short Circuit": "dSH2Y7IKtXWFaE53",
     "Shutdown": "MQnk1dyfbYgXh2Ns",
     "Skill Protocol": "YkRvH2zbzT6CWdpM",
-    "Slow-Release Medpac": "MBWJM5CWFyMJSHAY",
+    "Slow-release Medpac": "MBWJM5CWFyMJSHAY",
     "Smoke Cloud": "K5f18kJ5V2eMqLH7",
     "Smuggle": "d8xd9jPHRHF0WEgv",
     "Sonic Fists": "qIi1DYpjY8198ACL",

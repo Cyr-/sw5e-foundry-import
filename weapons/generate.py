@@ -3,6 +3,8 @@ import re
 from weapons.template import template
 from utilities.paths import weap_path
 from utilities.SW5e_ID_Mgmt import getID
+from scrapers.scrapeDBs import getName
+
 
 
 def generateWeaponDbFile(weapons, fileName):
@@ -10,7 +12,7 @@ def generateWeaponDbFile(weapons, fileName):
 
     for weapon in weapons:
         item = weapon
-        item["name"] = item["name"] if item["name"].upper() == item["name"] else item["name"].title()
+        item["name"] = getName(item)
         item["_id"] = getID(item["name"], weap_path)
         item["description"] = generateDescription(item)
 

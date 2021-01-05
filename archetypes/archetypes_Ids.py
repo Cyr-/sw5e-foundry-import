@@ -11,7 +11,7 @@ archetypes_Ids = {
     "Echani Order": "0s8yk4E0Kneqe4zt",
     "Form Ii: Makashi": "rW7zqxiNXePBLnui",
     "Form Iii: Soresu": "ECxUMB1p8nu6WAGL",
-    "Form V: Shien/Djem So": "i0AaMWBnSREQdQsg",
+    "Form V: Shien/djem So": "i0AaMWBnSREQdQsg",  # TODO: fix caps
     "Form Vi: Niman": "w1XQ5LzJNpk6PT0F",
     "Gadgeteer Engineering": "SsvsNMkJX1wW2rs6",
     "Gunslinger Practice": "HAbjFjbdRHO3mBss",
@@ -42,7 +42,7 @@ archetypes_Ids = {
     "Acquisitions Practice": "uKs4nEUZxYJ6iAd7",
     "Addicted Approach": "PCwepUZqHYlxr4T3",
     "Adept Specialist": "6HRxOPMOmOiKmuIG",
-    "Aing-Tii Order": "f6laKRexQAH7Oa3b",
+    "Aing-tii Order": "f6laKRexQAH7Oa3b",
     "Artificer Engineering": "F3eJbFw1kKde9Zg9",
     "Artillerist Technique": "sgoAH5OjfxsXf2fp",
     "Astrotech Engineering": "avFn1m9oUpDgKAAF",
@@ -60,12 +60,16 @@ archetypes_Ids = {
     "Disabling Practice": "KXH9dZsv2CAXAa6X",
     "Enhancement Specialist": "dY9gPH2vjYpS9onW",
     "Explorer Pursuit": "rhte8G7Duf9dtKLV",
-    "Form I: Shii-Cho": "cROcc25Zj1MT6Yf6",
+
+    # TODO: Fix caps
+    "Form I: Shii-cho": "cROcc25Zj1MT6Yf6",
     "Form Iv: Ataru": "9Hva27QHj2ruQXTA",
     "Form Ix: Tràkata": "ucmQpCjxdEN6tpxD",
-    "Form Vii: Juyo/Vapaad": "3yOiMsM439IfwEBm",
+    "Form Vii: Juyo/vapaad": "3yOiMsM439IfwEBm",  # TODO: Fix cap
     "Form Viii: Sokan": "t5LS6epj3270S38n",
-    "Form X: Jar'Kai": "pr7Xe82MOaof0IXj",
+    # end fix caps
+
+    "Form X: Jar'kai": "pr7Xe82MOaof0IXj",
     "Frenzied Approach": "4zUolY92dTrk3e5B",
     "Gambler Pursuit": "lGoI3XalF3gv8el4",
     "Geneticist Pursuit": "nP8lpZPBh0HGKUJR",
