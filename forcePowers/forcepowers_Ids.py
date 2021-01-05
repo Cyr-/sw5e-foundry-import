@@ -40,7 +40,7 @@ forcepowers_Ids = {
     "Fear": "haGnWeBa6QhTG9Dh",
     "Feedback": "Pf4e5uRdTd4VuUjU",
     "Force Barrier": "T5nzsISIa6ep9YRX",
-    "Force Blind/Deafen": "bDdyZTL7KCiz2zXR",
+    "Force Blind/deafen": "bDdyZTL7KCiz2zXR",  # TODO: Fix caps
     "Force Body": "iWTTNyNi2mwVDlUF",
     "Force Breach": "d3nRwoHE7vUvWqG0",
     "Force Camoflage": "i1N033vPzDom3Kpj",
@@ -57,7 +57,7 @@ forcepowers_Ids = {
     "Force Mend": "u91uDdCIN7FvEBzx",
     "Force Project": "KVY80cxeW955U6mG",
     "Force Propel": "3KGdCbHATzaghiwo",
-    "Force Push/Pull": "kNiT2BD3eIgE1zys",
+    "Force Push/pull": "kNiT2BD3eIgE1zys",  # TODO: Fix caps
     "Force Repulse": "It12G2wROx7ojgwu",
     "Force Scream": "UTCkJSnF7R7V2bqF",
     "Force Sight": "PUHY0RrLsi4tAnZx",

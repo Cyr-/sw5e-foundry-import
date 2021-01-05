@@ -1,3 +1,5 @@
+import re
+
 from adventuringGear.template import ammoTemplate
 from adventuringGear.template import explosiveTemplate
 from adventuringGear.template import utilityTemplate
@@ -6,17 +8,17 @@ from adventuringGear.template import medicalTemplate
 from adventuringGear.template import instrumentTemplate
 from utilities.paths import ag_path
 from utilities.SW5e_ID_Mgmt import getID
-import re
+from scrapers.scrapeDBs import getName
 
 
 def getBasicInfo(item):
-    item["name"] = item["name"].title()
+    item["name"] = getName(item)
     item["_id"] = getID(item["name"], ag_path)
     if item["description"]:
         item["description"] = "<p>" + str(item["description"]).replace("\r", "").replace("\n", " ") + "</p>"
     else:
         item["description"] = ""
-    item["img"] = "systems/sw5e/packs/Icons/" + item["equipmentCategory"] + "/" + item["contentSource"] + "/" + item["name"].title().replace(" ", "%20").replace(",", "") + ".webp"
+    item["img"] = "systems/sw5e/packs/Icons/" + item["equipmentCategory"] + "/" + item["contentSource"] + "/" + item["name"].replace(" ", "%20").replace(",", "") + ".webp"
     return item
 
 
@@ -128,7 +130,7 @@ def generateAdventuringGearDbFile(items, fileName):
             db.append(generateAmmoEntry(item))
         elif item["equipmentCategory"] == "Explosive":
             db.append(generateExplosiveEntry(item))
-        elif item["equipmentCategory"] == "Utility":
+        elif item["equipmentCategory"] == "Utility" or "Tool":
             db.append(generateUtilityEntry(item))
         elif item["equipmentCategory"] == "Kit":
             db.append(generateKitEntry(item))

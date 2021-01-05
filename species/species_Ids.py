@@ -7,9 +7,9 @@ species_Ids = {
     "Chiss": "cRqoLZOEd6813W08",
     "Devaronian": "y9JI1QTRHlvbWDwB",
     "Droid, Class I": "05Qnk7HLSTjoGyr2",
-    "Droid, Class Ii": "jJbuBlZaAMdqDXcT",
-    "Droid, Class Iii": "6dUPGIldzOLY7WA8",
-    "Droid, Class Iv": "VAD3Pi9aFD88GbVL",
+    "Droid, Class Ii": "jJbuBlZaAMdqDXcT",  # TODO: Fix Cap
+    "Droid, Class Iii": "6dUPGIldzOLY7WA8",  # TODO: Fix Cap
+    "Droid, Class Iv": "VAD3Pi9aFD88GbVL",  # TODO: Fix Cap
     "Droid, Class V": "bHNVgsazMaG6xhwn",
     "Duros": "GExUpA4NmRaxS8Gm",
     "Ewok": "AUXWviDOa1PWlgq4",
@@ -26,7 +26,7 @@ species_Ids = {
     "Togruta": "qS5HklGyCBanHFyI",
     "Trandoshan": "2Vo8yHWlGIHj8hau",
     "Tusken": "v19hw62cqU3qCYUO",
-    "Twi'Lek": "zQoxcJ5iQXQozMgm",
+    "Twi'lek": "zQoxcJ5iQXQozMgm",
     "Weequay": "mRTpYQFJkZtF0fXy",
     "Wookiee": "2OAuMEI1zxPGdeOy",
     "Zabrak": "FixqnQKxrYLnNyo2"

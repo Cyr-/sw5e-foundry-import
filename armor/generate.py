@@ -1,6 +1,8 @@
 from armor.template import template
 from utilities.paths import arm_path
 from utilities.SW5e_ID_Mgmt import getID
+from scrapers.scrapeDBs import getName
+
 
 
 def generateArmorDbFile(armors, fileName):
@@ -8,7 +10,7 @@ def generateArmorDbFile(armors, fileName):
 
     for armor in armors:
         item = armor
-        item["name"] = item["name"].title()
+        item["name"] = getName(item)
         item["_id"] = getID(item["name"], arm_path)
         item["description"] = generateDescription(item)
         item["activation"] = {
